@@ -1,0 +1,100 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace WebApi.Migrations
+{
+    /// <inheritdoc />
+    public partial class mig_29 : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Podcasts_ArticleCategories_ArticleCategoryId",
+                table: "Podcasts");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Podcasts_ArticleCategoryId",
+                table: "Podcasts");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "178317a9-c3fa-41a7-a6b2-73a3d4cccb9c");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "88ac6254-cd5f-4b87-8db9-5523506b675c");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "e6a6b78f-8f5c-4f25-82f0-ffd06814b75c");
+
+            migrationBuilder.DropColumn(
+                name: "ArticleCategoryId",
+                table: "Podcasts");
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "5b1b6059-db25-45d8-aa93-1d6198673d39", null, "User", "USER" },
+                    { "7063cde3-f2d7-4d18-9717-4ca9fc8b27f4", null, "Admin", "ADMIN" },
+                    { "de3ff843-1336-48a1-8cb7-13d7cbdeb404", null, "Doctor", "DOCTOR" }
+                });
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "5b1b6059-db25-45d8-aa93-1d6198673d39");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "7063cde3-f2d7-4d18-9717-4ca9fc8b27f4");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "de3ff843-1336-48a1-8cb7-13d7cbdeb404");
+
+            migrationBuilder.AddColumn<int>(
+                name: "ArticleCategoryId",
+                table: "Podcasts",
+                type: "int",
+                nullable: true);
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "178317a9-c3fa-41a7-a6b2-73a3d4cccb9c", null, "Doctor", "DOCTOR" },
+                    { "88ac6254-cd5f-4b87-8db9-5523506b675c", null, "User", "USER" },
+                    { "e6a6b78f-8f5c-4f25-82f0-ffd06814b75c", null, "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Podcasts_ArticleCategoryId",
+                table: "Podcasts",
+                column: "ArticleCategoryId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Podcasts_ArticleCategories_ArticleCategoryId",
+                table: "Podcasts",
+                column: "ArticleCategoryId",
+                principalTable: "ArticleCategories",
+                principalColumn: "ArticleCategoryId");
+        }
+    }
+}
